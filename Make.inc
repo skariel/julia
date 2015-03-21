@@ -464,7 +464,7 @@ endif
 
 # Set some ARCH-specific flags
 ifneq ($(USEICC),1)
-ifneq ($(ARCH), arm)
+ifneq ($(findstring arm,$(ARCH)), arm)
 CC += -m$(BINARY)
 CXX += -m$(BINARY)
 FC += -m$(BINARY)
@@ -491,13 +491,13 @@ else ifeq ($(ARCH),i686)
 BINARY=32
 else ifeq ($(ARCH),x86_64)
 BINARY=64
-else ifeq ($(ARCH),arm)
+else ifeq ($(findstring arm,$(ARCH)),arm)
 else
 $(error "unknown word-size for arch: $(ARCH)")
 endif
 
 ifeq ($(USEGCC),1)
-ifeq ($(ARCH), arm)
+ifeq ($(findstring arm,$(ARCH)), arm)
 else ifneq ($(ARCH), ppc64)
   SHIPFLAGS += -momit-leaf-frame-pointer
 endif
